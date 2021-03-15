@@ -60,7 +60,7 @@ public class Player : MonoBehaviour, IActorTemplate
     }
 
     void Movement()
-    {
+    {   //Moving to the Right
         if(Input.GetAxisRaw("Horizontal") > 0)
         {
             if(transform.localPosition.x < width + width / 0.9f)
@@ -69,14 +69,16 @@ public class Player : MonoBehaviour, IActorTemplate
             }
         }
 
+        //Moving to the left
         if(Input.GetAxisRaw("Horizontal")< 0)
         {
-            if(transform.localPosition.x > width + width / 0.9f)
+            if(transform.localPosition.x > width + width / 6)
             {
                 transform.localPosition += new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0);
             }
         }
 
+        //Moving down
         if(Input.GetAxisRaw("Vertical")< 0)
         {
             if(transform.localPosition.y> -height / 3f)
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour, IActorTemplate
             }
         }
 
+        //Moving up
         if (Input.GetAxisRaw("Vertical") > 0)
         {
             if(transform.localPosition.y < height / 2.5f)
