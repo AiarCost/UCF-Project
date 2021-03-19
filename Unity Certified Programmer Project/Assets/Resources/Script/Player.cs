@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IActorTemplate
         height = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f);
         width = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f);
         _Player = GameObject.Find("_Player");
+        
     }
 
     // Update is called once per frame
@@ -99,6 +100,7 @@ public class Player : MonoBehaviour, IActorTemplate
 
     public void Die()
     {
+        GameManager.Instance.LifeLost();
         Destroy(this.gameObject);
     }
 

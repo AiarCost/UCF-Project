@@ -20,3 +20,4 @@ MonoBehaviour:
   hitPower: 1
   actor: {fileID: 7381418728069864645, guid: 5cc510cf90d6bad47ab745f3ce9c02cc, type: 3}
   actorBullets: {fileID: 0}
+  score: 200

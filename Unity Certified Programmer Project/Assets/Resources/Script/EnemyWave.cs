@@ -8,6 +8,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
     int travelSpeed;
     int fireSpeed;
     int hitPower;
+    int score;
 
     //wave enemy
     [SerializeField]
@@ -29,6 +30,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
         health = actorModel.health;
         travelSpeed = actorModel.speed;
         hitPower = actorModel.hitPower;
+        score = actorModel.score;
     }
 
     public void Die()
@@ -46,6 +48,7 @@ public class EnemyWave : MonoBehaviour, IActorTemplate
             }
             if(health <= 0)
             {
+                GameManager.Instance.GetComponent<ScoreManager>().SetScore(score);
                 Die();
             }
         }
