@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
- 
+        CameraSetup();
     }
 
     void CameraSetup()
