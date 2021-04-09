@@ -30,7 +30,36 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CameraSetup();
+        //CameraSetup();
+        SetLivesDisplay(playerLives);
+    }
+
+    public void SetLivesDisplay(int players)
+    {
+        if (GameObject.Find("lives"))
+        {
+            GameObject lives = GameObject.Find("lives");
+            if(lives.transform.childCount < 1)
+            {
+                GameObject life = GameObject.Instantiate(Resources.Load("Prefab/life")) as GameObject;
+                life.transform.SetParent(lives.transform);
+
+                //set visual lives
+                for (int i = 0; i < lives.transform.childCount; i++)
+                {
+                    lives.transform.GetChild(i).localScale = new Vector3(1, 1, 1);
+                }
+
+                //remove visual lives
+                for(int i = 0; i <(lives.transform.childCount - players); i++)
+                {
+                    lives.transform.GetChild(lives.transform.childCount - i - 1).localScale = Vector3.zero;
+                }
+            }
+        }
+
+
+
     }
 
     void CameraSetup()
@@ -76,8 +105,8 @@ public class GameManager : MonoBehaviour
     {
         switch (sceneNumber)
         {
-            //testLevel, Level1, Level2, Level3
-            case 3: case 4: case 5: case 6:
+            //Level1, Level2, Level3
+            case 3: case 4: case 5: 
                 {
                     LightSetup();
                     CameraSetup();
