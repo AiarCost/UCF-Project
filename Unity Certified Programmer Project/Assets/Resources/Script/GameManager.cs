@@ -39,10 +39,14 @@ public class GameManager : MonoBehaviour
         if (GameObject.Find("lives"))
         {
             GameObject lives = GameObject.Find("lives");
+
             if(lives.transform.childCount < 1)
             {
-                GameObject life = GameObject.Instantiate(Resources.Load("Prefab/life")) as GameObject;
-                life.transform.SetParent(lives.transform);
+                for(int i=0; i<5; i++)
+                {
+                    GameObject life = GameObject.Instantiate(Resources.Load("Prefab/life")) as GameObject;
+                    life.transform.SetParent(lives.transform);
+                }
 
                 //set visual lives
                 for (int i = 0; i < lives.transform.childCount; i++)
@@ -62,9 +66,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void CameraSetup()
+    void CameraSetup(float camSpeed)
     {
+
         GameObject gameCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        gameCamera.GetComponent<CameraMovement>().CamSpeed = camSpeed;
+
+
 
         //Camera Transform
         gameCamera.transform.position = new Vector3(0, 0, -300);
@@ -106,10 +114,15 @@ public class GameManager : MonoBehaviour
         switch (sceneNumber)
         {
             //Level1, Level2, Level3
-            case 3: case 4: case 5: 
+            case 3: case 4:  
                 {
                     LightSetup();
-                    CameraSetup();
+                    CameraSetup(0);
+                    break;
+                }
+            case 5:
+                {
+                    CameraSetup(150);
                     break;
                 }
         }

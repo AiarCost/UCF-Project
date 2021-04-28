@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IActorTemplate
 {
+
+    float camTravelSpeed;
+    public float CamTravelSpeed
+    {
+        get { return camTravelSpeed; }
+        set { camTravelSpeed = value; }
+    }
+
+    float movingScreen;
+
     int travelSpeed;
     int health;
     int hitPower;
@@ -32,14 +42,19 @@ public class Player : MonoBehaviour, IActorTemplate
         height = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f);
         width = 1 / (Camera.main.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f);
         _Player = GameObject.Find("_Player");
+        movingScreen = width;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        Movement();
-        Attack();
+        if(Time.timeScale == 1)
+        {
+            Movement();
+            Attack();
+        }
+
     }
 
     public void ActorStats(SOActorModel actorModel)
@@ -61,10 +76,17 @@ public class Player : MonoBehaviour, IActorTemplate
     }
 
     void Movement()
-    {   //Moving to the Right
+    {   
+        if(camTravelSpeed > 1)
+        {
+            transform.position += Vector3.right * Time.deltaTime * camTravelSpeed;
+            movingScreen += Time.deltaTime * camTravelSpeed;
+        }
+        
+        //Moving to the Right
         if(Input.GetAxisRaw("Horizontal") > 0)
         {
-            if(transform.localPosition.x < width + width / 0.9f)
+            if(transform.localPosition.x < movingScreen + width / 0.9f)
             {
                 transform.localPosition += new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0);
             }
@@ -73,7 +95,7 @@ public class Player : MonoBehaviour, IActorTemplate
         //Moving to the left
         if(Input.GetAxisRaw("Horizontal")< 0)
         {
-            if(transform.localPosition.x > width + width / 6)
+            if(transform.localPosition.x > movingScreen + width / 6)
             {
                 transform.localPosition += new Vector3(Input.GetAxisRaw("Horizontal") * Time.deltaTime * travelSpeed, 0, 0);
             }

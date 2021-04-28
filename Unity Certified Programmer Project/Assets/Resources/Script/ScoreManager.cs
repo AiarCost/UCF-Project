@@ -29,6 +29,7 @@ public class ScoreManager : MonoBehaviour
     public void SetScore(int incomingScore)
     {
         playerScore += incomingScore;
+        GameObject.Find("score").GetComponent<Text>().text = playerScore.ToString();
     }
 
     public void ResetScore()

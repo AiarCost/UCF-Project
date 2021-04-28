@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6560531913421057881}
   - component: {fileID: 4972365563203126325}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: radarPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

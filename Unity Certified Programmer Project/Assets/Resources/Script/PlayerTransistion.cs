@@ -32,7 +32,9 @@ public class PlayerTransistion : MonoBehaviour
 
     private void Start()
     {
+
         this.transform.localPosition = Vector3.zero;
+        Debug.Log("Transition Sent");
         startPos = transform.position;
         Distance();
 
@@ -42,6 +44,7 @@ public class PlayerTransistion : MonoBehaviour
     {
         if (levelStarted)
         {
+            GetComponent<Player>().enabled = false;
             StartCoroutine(PlayerMovement(transitionToEnd, 10));
         }
 
@@ -85,17 +88,14 @@ public class PlayerTransistion : MonoBehaviour
                 distCovered = 0;
                 GetComponent<Player>().enabled = true;
             }
-            else
-            {
-                distCovered += Time.deltaTime * transitionSpeed;
-                float fractionOfJourney = distCovered / journeyLength;
-                transform.position = Vector3.Lerp(transform.position, point, fractionOfJourney);
-            }
             yield return null;
-
-
         }
-
+        else
+        {
+            distCovered += Time.deltaTime * transitionSpeed;
+            float fractionOfJourney = distCovered / journeyLength;
+            transform.position = Vector3.Lerp(transform.position, point, fractionOfJourney);
+        }
     }
 
     void SpeedOff()

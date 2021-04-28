@@ -39,6 +39,7 @@ public class PlayerShipBuild : MonoBehaviour
 		playerShip = GameObject.Instantiate(Resources.Load("Prefab/Player/player_ship")) as GameObject;
 		playerShip.GetComponent<Player>().enabled = false;
 		playerShip.transform.position = new Vector3(0, 10000, 0);
+		Debug.Log("Upgrade Set");
 		playerShip.GetComponent<Player>().ActorStats(defaultPlayerShip);
 	}
 
